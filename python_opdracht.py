@@ -22,7 +22,8 @@ for friend in cursor:
 	print(friend)
 
 # Pas de database aan
-cursor.execute('UPDATE friends SET country=? WHERE first_name=?', (vriend.land, vriend.voornaam))
+cursor.execute('UPDATE friends SET country=? WHERE first_name=? AND last_name=?'
+	, (vriend.land, vriend.voornaam, vriend.achternaam))
 dbconnectie.commit()
 
 # Print de originele database met de aanpassing
@@ -31,14 +32,20 @@ cursor.execute("SELECT * FROM friends")
 for friend in cursor:
 	print(friend)
 
-cursor.close()
-dbconnectie.close()
-
 # Inlezen van een csv-bestand
-'''try:
+try:
 	with open('friends.csv', 'w', newline='') as friends_bestand:
 		writer = csv.writer(friends_bestand)
-		writer.writerow(['name', 'age'])
+		writer.writerow(['Voornaam', 'Achternaam', 'Woonplaats'])
+		# Haal alle vrienden op
+		cursor.execute("SELECT * FROM friends")
+		for friend in cursor:
+			# Schrijf de vrienden in een csv-bestand
+			writer.writerow([friend[0], friend[1], friend[2]])
+		print("\nWe hebben voor u ook een csv bestand opgemaakt zodat u uw vrienden kunt zien!")
 except Exception as e:
 	print("Fout bij wegschrijven: ", e)
-	sys.exit(1)'''
+	sys.exit(1)
+
+cursor.close()
+dbconnectie.close()
