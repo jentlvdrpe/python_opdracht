@@ -13,3 +13,5 @@ De database ziet er als volgt uit:
 - Dyntr Thomas Czech
 
 We kunnen dus het land van eender welk van onze vrienden aanpassen, dit zal ook opgeslaan worden in csv-bestand.
+
+De database die in het instellingenbestand zit mogen we gewoon in de map steken waar onze python code zit. Dit is voldoende om het programma te doen werken.
